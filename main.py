@@ -8,7 +8,7 @@ from core.settings import settings
 from aiogram.filters import Command
 from aiogram import F
 from core.utils.commands import set_commands
-from core.handlers.stream import stream_run
+from core.handlers.stream import stream_run, stream_stop
 from core.utils.statesform import StepsViewProjects
 
 
@@ -32,6 +32,7 @@ async def start():
     dp.shutdown.register(stop_bot)
 
     dp.callback_query.register(stream_run, F.data == 'play_track')
+    dp.callback_query.register(stream_stop, F.data == 'stop_track')
 
     dp.message.register(get_start, Command(commands=['start', 'run']))
 
